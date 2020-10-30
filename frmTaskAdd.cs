@@ -14,6 +14,7 @@ namespace TaskManagementSystem
     public partial class frmTaskAdd : Form
     {
         Task objTask = null;
+        string ConnectionString = "Server=Localhost; Database=Aptech; Trusted_Connection=True; MultipleActiveResultSets=true";
         public frmTaskAdd()
         {
             InitializeComponent();
@@ -61,7 +62,7 @@ namespace TaskManagementSystem
                             objTask.Status = txtstatus.Text;
                             returnedValue = SaveTask(objTask);
                             msg = "Task record added successfully";
-                        } 
+                        }
                         else
                         {
                             objTask.TaskName = txtTask.Text;
@@ -87,7 +88,7 @@ namespace TaskManagementSystem
             try
             {
                 SqlConnection connection = new SqlConnection();
-                connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+                connection.ConnectionString = this.ConnectionString;
                 connection.Open();
 
                 SqlCommand command = new SqlCommand();
@@ -119,13 +120,13 @@ namespace TaskManagementSystem
             try
             {
                 SqlConnection connection = new SqlConnection();
-                connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+                connection.ConnectionString = this.ConnectionString;
                 connection.Open();
 
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "update Tasks set task = '"+ objUpdatTask.TaskName +"', description = '"+ objUpdatTask.Description +"', status = '"+ objUpdatTask.Status +"' where id =  '"+ objUpdatTask.Id +"'";
+                command.CommandText = "update Tasks set task = '" + objUpdatTask.TaskName + "', description = '" + objUpdatTask.Description + "', status = '" + objUpdatTask.Status + "' where id =  '" + objUpdatTask.Id + "'";
 
                 int noOfRowsAffected = command.ExecuteNonQuery();
                 connection.Close();
@@ -162,7 +163,7 @@ namespace TaskManagementSystem
         void RefreshGrid()
         {
             SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+            connection.ConnectionString = this.ConnectionString;
             connection.Open();
 
             SqlCommand command = new SqlCommand();
@@ -187,21 +188,12 @@ namespace TaskManagementSystem
             dgTasks.DataSource = tasklist;
         }
 
-        private void dgTasks_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // HitTestInfo hitTestInfo = dgTasks.HitTest(e.X, e.Y);
-            if (e.Button == MouseButtons.Right)
-            {
-                this.dgViewContextMenu.Show(dgTasks, e.Location);
-            }
-        }
-
         private void mnuTaskEdit_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dgTasks.CurrentRow.Cells[0].Value.ToString());
 
             SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+            connection.ConnectionString = this.ConnectionString;
             connection.Open();
 
             SqlCommand command = new SqlCommand();
@@ -216,7 +208,7 @@ namespace TaskManagementSystem
                 objTask.Id = Convert.ToInt32(myReader["id"]);
                 objTask.TaskName = myReader["task"].ToString();
                 objTask.Description = myReader["description"].ToString();
-                objTask.Status = myReader["status"].ToString();                
+                objTask.Status = myReader["status"].ToString();
             }
 
             myReader.Close();
@@ -232,12 +224,12 @@ namespace TaskManagementSystem
 
         private void mnuTaskDelete_Click(object sender, EventArgs e)
         {
-            DialogResult choice =  MessageBox.Show("This would delete the Task record. Are you sure?", "Sure", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult choice = MessageBox.Show("This would delete the Task record. Are you sure?", "Sure", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (choice == DialogResult.Yes)
             {
                 int id = Convert.ToInt32(dgTasks.CurrentRow.Cells[0].Value.ToString());
                 SqlConnection connection = new SqlConnection();
-                connection.ConnectionString = "Server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+                connection.ConnectionString = this.ConnectionString;
                 connection.Open();
 
                 SqlCommand command = new SqlCommand();
@@ -251,6 +243,15 @@ namespace TaskManagementSystem
                     MessageBox.Show("Record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     RefreshGrid();
                 }
+            }
+        }
+
+        private void dgTasks_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                dgTasks.CurrentCell = dgTasks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                e.ContextMenuStrip = dgViewContextMenu;
             }
         }
     }

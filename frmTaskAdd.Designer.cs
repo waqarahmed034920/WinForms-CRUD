@@ -158,9 +158,10 @@
             this.dgTasks.ReadOnly = true;
             this.dgTasks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgTasks.RowHeadersVisible = false;
+            this.dgTasks.RowTemplate.ContextMenuStrip = this.dgViewContextMenu;
             this.dgTasks.Size = new System.Drawing.Size(358, 488);
             this.dgTasks.TabIndex = 2;
-            this.dgTasks.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgTasks_CellMouseDown);
+            this.dgTasks.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgTasks_CellContextMenuStripNeeded);
             // 
             // splitContainer1
             // 
@@ -187,25 +188,25 @@
             this.mnuTaskEdit,
             this.mnuTaskDelete});
             this.dgViewContextMenu.Name = "dgViewContextMenu";
-            this.dgViewContextMenu.Size = new System.Drawing.Size(181, 92);
+            this.dgViewContextMenu.Size = new System.Drawing.Size(108, 70);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.editToolStripMenuItem.Text = "View";
             // 
             // mnuTaskEdit
             // 
             this.mnuTaskEdit.Name = "mnuTaskEdit";
-            this.mnuTaskEdit.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskEdit.Size = new System.Drawing.Size(107, 22);
             this.mnuTaskEdit.Text = "Edit";
             this.mnuTaskEdit.Click += new System.EventHandler(this.mnuTaskEdit_Click);
             // 
             // mnuTaskDelete
             // 
             this.mnuTaskDelete.Name = "mnuTaskDelete";
-            this.mnuTaskDelete.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskDelete.Size = new System.Drawing.Size(107, 22);
             this.mnuTaskDelete.Text = "Delete";
             this.mnuTaskDelete.Click += new System.EventHandler(this.mnuTaskDelete_Click);
             // 
