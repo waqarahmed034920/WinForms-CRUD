@@ -159,6 +159,7 @@
             this.dgTasks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgTasks.RowHeadersVisible = false;
             this.dgTasks.RowTemplate.ContextMenuStrip = this.dgViewContextMenu;
+            this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTasks.Size = new System.Drawing.Size(358, 488);
             this.dgTasks.TabIndex = 2;
             this.dgTasks.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgTasks_CellContextMenuStripNeeded);
