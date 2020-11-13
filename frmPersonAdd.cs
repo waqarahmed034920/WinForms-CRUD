@@ -1,19 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+using TaskManagementSystem.Model;
 
 namespace TaskManagementSystem
 {
     public partial class frmPersonAdd : Form
     {
+        Person Person = null;
+        private object objperson;
+        private bool returnedValue;
+        private string msg;
+
         // Event driven programming.
         public frmPersonAdd()
         {
             InitializeComponent();
+        }
+
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("this is click Event of btncancel");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -23,11 +34,149 @@ namespace TaskManagementSystem
                 MessageBox.Show("Please enter first name", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 txtFirstName.Focus();
             }
+            else
+            {
+                if (txtLastName.Text == string.Empty)
+                {
+                    MessageBox.Show("Please enter first name", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    txtLastName.Focus();
+                }
+
+                else
+                {
+                    if (txtAddress.Text == string.Empty)
+                    {
+                        MessageBox.Show("Please enter first name", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        txtAddress.Focus();
+                    }
+                    else
+                    {
+                        if (txtPhone.Text == string.Empty)
+                        {
+                            MessageBox.Show("Please enter first name", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            txtPhone.Focus();
+                        }
+                        else
+                        {
+                            if (txtEmail.Text == string.Empty)
+                            {
+                                MessageBox.Show("Please enter first name", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                                txtEmail.Focus();
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+           
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+
+        private bool savePerson(Person objperson)
         {
-            MessageBox.Show("this is click Event of btncancel");
+            try
+            {
+                SqlConnection connection = new SqlConnection();
+                connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "insert into person(FirstName,lastName,Address,Phone,Email) values('" + objperson.FirstName + "','" + objperson.LastName + "','" + objperson.Address + "','" + objperson.Phone + "','" + objperson.Email + "')";
+
+                int noOfRowsAffected = command.ExecuteNonQuery();
+                connection.Close();
+                if (noOfRowsAffected >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+        }
+
+        private bool updateperson(Person objupdateper)
+        {
+
+            try
+            {
+                SqlConnection connection = new SqlConnection();
+                connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "update person set FirstName = '" + objupdateper.FirstName + "' ,lastName ='" + objupdateper.LastName + "',Address = '" + objupdateper.Address + "', phone= '" + objupdateper.Phone + "', Email='" + objupdateper.Email + "' where id '" + objupdateper.Id + "'";
+
+                int noOfRowsAffected = command.ExecuteNonQuery();
+                connection.Close();
+                if (noOfRowsAffected >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void frmperson_Load(object sender, EventArgs e)
+        {
+            RefreshGrid();
+        }
+        void RefreshGrid()
+        {
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
+            connection.Open();
+
+            SqlCommand command = new SqlCommand();
+            command.Connection = connection;
+            command.CommandType = CommandType.Text;
+            command.CommandText = "select * from person";
+            SqlDataReader myreader = command.ExecuteReader();
+            List<Person> personlist = new List<Person>();
+            while (myreader.Read())
+            {
+                Person objperson = new Person();
+                objperson.Id =  Convert.ToInt32(myreader["id"].ToString());
+                objperson.FirstName = myreader["firstname"].ToString();
+                objperson.LastName = myreader["lastname"].ToString();
+                objperson.Address = myreader["address"].ToString();
+                objperson.Phone = myreader["phone"].ToString();
+                objperson.Email = myreader["email"].ToString();
+                personlist.Add(objperson);
+            }
+            myreader.Close();
+            connection.Close();
+            dgPerson.DataSource = personlist;
+        }
+
+        private void dgPerson_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                dgPerson.CurrentCell = dgPerson.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                e.ContextMenuStrip = dgPersonContextMenu;
+            }
         }
     }
 }

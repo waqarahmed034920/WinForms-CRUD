@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
@@ -42,8 +43,18 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgPerson = new System.Windows.Forms.DataGridView();
+            this.dgPersonContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPerson)).BeginInit();
+            this.dgPersonContextMenu.SuspendLayout();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -160,7 +171,7 @@
             this.groupBox1.Controls.Add(this.lblPhone);
             this.groupBox1.Controls.Add(this.lblAddress);
             this.groupBox1.Controls.Add(this.txtAddress);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(1, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(360, 167);
             this.groupBox1.TabIndex = 12;
@@ -171,25 +182,83 @@
             // 
             this.groupBox2.Controls.Add(this.btnCancel);
             this.groupBox2.Controls.Add(this.btnSave);
-            this.groupBox2.Location = new System.Drawing.Point(12, 179);
+            this.groupBox2.Location = new System.Drawing.Point(1, 171);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(360, 64);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
+            // 
+            // dgPerson
+            // 
+            this.dgPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPerson.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgPerson.Location = new System.Drawing.Point(0, 0);
+            this.dgPerson.Name = "dgPerson";
+            this.dgPerson.ReadOnly = true;
+            this.dgPerson.RowHeadersVisible = false;
+            this.dgPerson.RowTemplate.ContextMenuStrip = this.dgPersonContextMenu;
+            this.dgPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgPerson.Size = new System.Drawing.Size(542, 475);
+            this.dgPerson.TabIndex = 14;
+            this.dgPerson.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgPerson_CellContextMenuStripNeeded);
+            // 
+            // dgPersonContextMenu
+            // 
+            this.dgPersonContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.dgPersonContextMenu.Name = "dgPersonContextMenu";
+            this.dgPersonContextMenu.Size = new System.Drawing.Size(108, 48);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgPerson);
+            this.splitContainer1.Size = new System.Drawing.Size(916, 475);
+            this.splitContainer1.SplitterDistance = 370;
+            this.splitContainer1.SplitterIncrement = 10;
+            this.splitContainer1.TabIndex = 16;
             // 
             // frmPersonAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(503, 475);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(916, 475);
+            this.Controls.Add(this.splitContainer1);
             this.Name = "frmPersonAdd";
             this.Text = "Add New Person";
+            this.Load += new System.EventHandler(this.frmperson_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgPerson)).EndInit();
+            this.dgPersonContextMenu.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -210,6 +279,11 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridView dgPerson;
+        private System.Windows.Forms.ContextMenuStrip dgPersonContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

@@ -169,7 +169,7 @@ namespace TaskManagementSystem
             command.Connection = connection;
             command.CommandType = CommandType.Text;
             command.CommandText = "select * from Tasks";
-            SqlDataReader myReader = command.ExecuteReader();
+            SqlDataReader myReader = command.ExecuteReader(); 
             List<Task> tasklist = new List<Task>();
             while (myReader.Read())
             {
@@ -185,15 +185,6 @@ namespace TaskManagementSystem
             connection.Close();
 
             dgTasks.DataSource = tasklist;
-        }
-
-        private void dgTasks_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // HitTestInfo hitTestInfo = dgTasks.HitTest(e.X, e.Y);
-            if (e.Button == MouseButtons.Right)
-            {
-                this.dgViewContextMenu.Show(dgTasks, e.Location);
-            }
         }
 
         private void mnuTaskEdit_Click(object sender, EventArgs e)
@@ -252,6 +243,16 @@ namespace TaskManagementSystem
                     RefreshGrid();
                 }
             }
+        }
+
+        private void dgTasks_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                dgTasks.CurrentCell = dgTasks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                e.ContextMenuStrip = dgTasksContextMenu;
+            }
+
         }
     }
 }

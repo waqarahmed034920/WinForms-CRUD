@@ -20,6 +20,7 @@ namespace TaskManagementSystem
             frmPersonAdd objPersonAdd = new frmPersonAdd();
             objPersonAdd.MdiParent = this;
             objPersonAdd.Show();
+            objPersonAdd.WindowState = FormWindowState.Maximized;
         }
 
         private void mnuTaskAdd_Click(object sender, EventArgs e)

@@ -41,7 +41,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.dgTasks = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dgViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dgTasksContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +51,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.dgViewContextMenu.SuspendLayout();
+            this.dgTasksContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -158,9 +158,10 @@
             this.dgTasks.ReadOnly = true;
             this.dgTasks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgTasks.RowHeadersVisible = false;
+            this.dgTasks.RowTemplate.ContextMenuStrip = this.dgTasksContextMenu;
             this.dgTasks.Size = new System.Drawing.Size(358, 488);
             this.dgTasks.TabIndex = 2;
-            this.dgTasks.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgTasks_CellMouseDown);
+            this.dgTasks.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgTasks_CellContextMenuStripNeeded);
             // 
             // splitContainer1
             // 
@@ -180,32 +181,32 @@
             this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.TabIndex = 3;
             // 
-            // dgViewContextMenu
+            // dgTasksContextMenu
             // 
-            this.dgViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dgTasksContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
             this.mnuTaskEdit,
             this.mnuTaskDelete});
-            this.dgViewContextMenu.Name = "dgViewContextMenu";
-            this.dgViewContextMenu.Size = new System.Drawing.Size(181, 92);
+            this.dgTasksContextMenu.Name = "dgViewContextMenu";
+            this.dgTasksContextMenu.Size = new System.Drawing.Size(108, 70);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.editToolStripMenuItem.Text = "View";
             // 
             // mnuTaskEdit
             // 
             this.mnuTaskEdit.Name = "mnuTaskEdit";
-            this.mnuTaskEdit.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskEdit.Size = new System.Drawing.Size(107, 22);
             this.mnuTaskEdit.Text = "Edit";
             this.mnuTaskEdit.Click += new System.EventHandler(this.mnuTaskEdit_Click);
             // 
             // mnuTaskDelete
             // 
             this.mnuTaskDelete.Name = "mnuTaskDelete";
-            this.mnuTaskDelete.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskDelete.Size = new System.Drawing.Size(107, 22);
             this.mnuTaskDelete.Text = "Delete";
             this.mnuTaskDelete.Click += new System.EventHandler(this.mnuTaskDelete_Click);
             // 
@@ -227,7 +228,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
-            this.dgViewContextMenu.ResumeLayout(false);
+            this.dgTasksContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -246,7 +247,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridView dgTasks;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ContextMenuStrip dgViewContextMenu;
+        private System.Windows.Forms.ContextMenuStrip dgTasksContextMenu;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskEdit;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskDelete;
