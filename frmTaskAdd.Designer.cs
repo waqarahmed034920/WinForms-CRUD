@@ -40,18 +40,18 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgTasks = new System.Windows.Forms.DataGridView();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgTasksContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).BeginInit();
+            this.dgTasksContextMenu.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.dgTasksContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -163,6 +163,36 @@
             this.dgTasks.TabIndex = 2;
             this.dgTasks.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgTasks_CellContextMenuStripNeeded);
             // 
+            // dgTasksContextMenu
+            // 
+            this.dgTasksContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.mnuTaskEdit,
+            this.mnuTaskDelete});
+            this.dgTasksContextMenu.Name = "dgViewContextMenu";
+            this.dgTasksContextMenu.Size = new System.Drawing.Size(181, 92);
+            this.dgTasksContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.dgTasksContextMenu_Opening);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Text = "View";
+            // 
+            // mnuTaskEdit
+            // 
+            this.mnuTaskEdit.Name = "mnuTaskEdit";
+            this.mnuTaskEdit.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskEdit.Text = "Edit";
+            this.mnuTaskEdit.Click += new System.EventHandler(this.mnuTaskEdit_Click);
+            // 
+            // mnuTaskDelete
+            // 
+            this.mnuTaskDelete.Name = "mnuTaskDelete";
+            this.mnuTaskDelete.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskDelete.Text = "Delete";
+            this.mnuTaskDelete.Click += new System.EventHandler(this.mnuTaskDelete_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,35 +211,6 @@
             this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.TabIndex = 3;
             // 
-            // dgTasksContextMenu
-            // 
-            this.dgTasksContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.mnuTaskEdit,
-            this.mnuTaskDelete});
-            this.dgTasksContextMenu.Name = "dgViewContextMenu";
-            this.dgTasksContextMenu.Size = new System.Drawing.Size(108, 70);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.editToolStripMenuItem.Text = "View";
-            // 
-            // mnuTaskEdit
-            // 
-            this.mnuTaskEdit.Name = "mnuTaskEdit";
-            this.mnuTaskEdit.Size = new System.Drawing.Size(107, 22);
-            this.mnuTaskEdit.Text = "Edit";
-            this.mnuTaskEdit.Click += new System.EventHandler(this.mnuTaskEdit_Click);
-            // 
-            // mnuTaskDelete
-            // 
-            this.mnuTaskDelete.Name = "mnuTaskDelete";
-            this.mnuTaskDelete.Size = new System.Drawing.Size(107, 22);
-            this.mnuTaskDelete.Text = "Delete";
-            this.mnuTaskDelete.Click += new System.EventHandler(this.mnuTaskDelete_Click);
-            // 
             // frmTaskAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,10 +226,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).EndInit();
+            this.dgTasksContextMenu.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
-            this.dgTasksContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

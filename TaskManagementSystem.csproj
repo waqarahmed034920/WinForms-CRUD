@@ -58,6 +58,7 @@
     <Compile Include="frmTaskAdd.Designer.cs">
       <DependentUpon>frmTaskAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Repositories\TaskRepository.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Program.cs" />
