@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using TaskManagementSystem.Model;
-using static System.Windows.Forms.DataGridView;
 
 namespace TaskManagementSystem
 {
@@ -15,6 +11,11 @@ namespace TaskManagementSystem
     {
         Task objTask = null;
         string ConnectionString = "Server=Localhost; Database=Aptech; Trusted_Connection=True; MultipleActiveResultSets=true";
+        int recordsPerPage = 10;
+        int currentPageNumber = 1;
+        int lastPageNumber = 16;
+        int TotalRecords;
+
         public frmTaskAdd()
         {
             InitializeComponent();
@@ -157,6 +158,7 @@ namespace TaskManagementSystem
 
         private void frmTaskAdd_Load(object sender, EventArgs e)
         {
+            ddlRecordsPerPage.SelectedIndex = 0;
             RefreshGrid();
         }
 
@@ -168,8 +170,17 @@ namespace TaskManagementSystem
 
             SqlCommand command = new SqlCommand();
             command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "select * from Tasks";
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "dbo.GetAllTask";
+            command.Parameters.AddWithValue("@RecordsPerPage", recordsPerPage);
+            command.Parameters.AddWithValue("@CurrentPage", currentPageNumber);
+
+            SqlDataAdapter DA = new SqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            DA.Fill(dt);
+
+
+
             SqlDataReader myReader = command.ExecuteReader();
             List<Task> tasklist = new List<Task>();
             while (myReader.Read())
@@ -184,7 +195,7 @@ namespace TaskManagementSystem
 
             myReader.Close();
             connection.Close();
-
+            lblShowingRecords.Text = String.Format("Showing {0} to {1} of {2} records.", (recordsPerPage * currentPageNumber) - recordsPerPage+1, (recordsPerPage * currentPageNumber), 160);
             dgTasks.DataSource = tasklist;
         }
 
@@ -253,6 +264,47 @@ namespace TaskManagementSystem
                 dgTasks.CurrentCell = dgTasks.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 e.ContextMenuStrip = dgViewContextMenu;
             }
+        }
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = 1;
+            RefreshGrid();
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber > 1)
+            {
+                currentPageNumber -= 1;
+                RefreshGrid();
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < lastPageNumber)
+            {
+                currentPageNumber += 1;
+                RefreshGrid();
+            }
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = lastPageNumber;
+            RefreshGrid();
+        }
+
+        private void ddlRecordsPerPage_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            recordsPerPage = Convert.ToInt32(ddlRecordsPerPage.SelectedItem);
+            RefreshGrid();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

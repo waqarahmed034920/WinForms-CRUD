@@ -40,18 +40,27 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgTasks = new System.Windows.Forms.DataGridView();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblShowingRecords = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ddlRecordsPerPage = new System.Windows.Forms.ComboBox();
+            this.btnFirst = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnLast = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).BeginInit();
+            this.dgViewContextMenu.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.dgViewContextMenu.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -160,27 +169,9 @@
             this.dgTasks.RowHeadersVisible = false;
             this.dgTasks.RowTemplate.ContextMenuStrip = this.dgViewContextMenu;
             this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTasks.Size = new System.Drawing.Size(358, 488);
+            this.dgTasks.Size = new System.Drawing.Size(453, 488);
             this.dgTasks.TabIndex = 2;
             this.dgTasks.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgTasks_CellContextMenuStripNeeded);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgTasks);
-            this.splitContainer1.Size = new System.Drawing.Size(712, 488);
-            this.splitContainer1.SplitterDistance = 350;
-            this.splitContainer1.TabIndex = 3;
             // 
             // dgViewContextMenu
             // 
@@ -196,6 +187,7 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.editToolStripMenuItem.Text = "View";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // mnuTaskEdit
             // 
@@ -211,12 +203,131 @@
             this.mnuTaskDelete.Text = "Delete";
             this.mnuTaskDelete.Click += new System.EventHandler(this.mnuTaskDelete_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer1.Panel2.Controls.Add(this.dgTasks);
+            this.splitContainer1.Size = new System.Drawing.Size(897, 488);
+            this.splitContainer1.SplitterDistance = 440;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lblShowingRecords);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.ddlRecordsPerPage);
+            this.groupBox3.Controls.Add(this.btnFirst);
+            this.groupBox3.Controls.Add(this.btnPrevious);
+            this.groupBox3.Controls.Add(this.btnNext);
+            this.groupBox3.Controls.Add(this.btnLast);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox3.Location = new System.Drawing.Point(0, 411);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(453, 77);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            // 
+            // lblShowingRecords
+            // 
+            this.lblShowingRecords.AutoSize = true;
+            this.lblShowingRecords.Location = new System.Drawing.Point(257, 17);
+            this.lblShowingRecords.Name = "lblShowingRecords";
+            this.lblShowingRecords.Size = new System.Drawing.Size(160, 13);
+            this.lblShowingRecords.TabIndex = 2;
+            this.lblShowingRecords.Text = "Showing 1 to 10 of 140 Records";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Records Per Page";
+            // 
+            // ddlRecordsPerPage
+            // 
+            this.ddlRecordsPerPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlRecordsPerPage.FormattingEnabled = true;
+            this.ddlRecordsPerPage.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30"});
+            this.ddlRecordsPerPage.Location = new System.Drawing.Point(106, 13);
+            this.ddlRecordsPerPage.Name = "ddlRecordsPerPage";
+            this.ddlRecordsPerPage.Size = new System.Drawing.Size(143, 21);
+            this.ddlRecordsPerPage.TabIndex = 1;
+            this.ddlRecordsPerPage.SelectionChangeCommitted += new System.EventHandler(this.ddlRecordsPerPage_SelectionChangeCommitted);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnFirst.Font = new System.Drawing.Font("Webdings", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFirst.Location = new System.Drawing.Point(8, 40);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(65, 27);
+            this.btnFirst.TabIndex = 3;
+            this.btnFirst.Text = "7";
+            this.btnFirst.UseCompatibleTextRendering = true;
+            this.btnFirst.UseVisualStyleBackColor = false;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnPrevious.Font = new System.Drawing.Font("Webdings", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrevious.Location = new System.Drawing.Point(73, 40);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(65, 27);
+            this.btnPrevious.TabIndex = 4;
+            this.btnPrevious.Text = "3";
+            this.btnPrevious.UseCompatibleTextRendering = true;
+            this.btnPrevious.UseVisualStyleBackColor = false;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnNext.Font = new System.Drawing.Font("Webdings", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(138, 40);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(65, 27);
+            this.btnNext.TabIndex = 5;
+            this.btnNext.Text = "4";
+            this.btnNext.UseCompatibleTextRendering = true;
+            this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnLast
+            // 
+            this.btnLast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnLast.Font = new System.Drawing.Font("Webdings", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLast.Location = new System.Drawing.Point(203, 40);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(65, 27);
+            this.btnLast.TabIndex = 6;
+            this.btnLast.Text = "8";
+            this.btnLast.UseCompatibleTextRendering = true;
+            this.btnLast.UseVisualStyleBackColor = false;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
+            // 
             // frmTaskAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(712, 488);
+            this.ClientSize = new System.Drawing.Size(897, 488);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmTaskAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -226,10 +337,12 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).EndInit();
+            this.dgViewContextMenu.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
-            this.dgViewContextMenu.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -252,5 +365,13 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskEdit;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskDelete;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnFirst;
+        private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnLast;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox ddlRecordsPerPage;
+        private System.Windows.Forms.Label lblShowingRecords;
     }
 }
