@@ -4,14 +4,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using TaskManagementSystem.Model;
+using TaskManagementSystem.Infrastructure.Interface;
 
 namespace TaskManagementSystem.Infrastructure.Repositories
 {
-    public class PersonRepositories
+    public class PersonRepositories: IRepository<Person>
     {
-       
-
-        public bool insert(Person objPerson)
+        public bool Insert(Person objPerson)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
@@ -20,7 +19,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             SqlCommand command = new SqlCommand();
             command.Connection = connection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "insert into person(FirstName,lastName,Address,Phone,Email) values('" + objperson.FirstName + "','" + objperson.LastName + "','" + objperson.Address + "','" + objperson.Phone + "','" + objperson.Email + "')";
+            command.CommandText = "insert into person(FirstName,lastName,Address,Phone,Email) values('" + objPerson.FirstName + "','" + objPerson.LastName + "','" + objPerson.Address + "','" + objPerson.Phone + "','" + objPerson.Email + "')";
 
             int noOfRowsAffected = command.ExecuteNonQuery();
             connection.Close();
@@ -34,7 +33,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             }
 
         }
-        public bool update(Person objPerson)
+        public bool Update(Person objPerson)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
@@ -43,7 +42,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             SqlCommand command = new SqlCommand();
             command.Connection = connection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "update person set FirstName = '" + objupdateper.FirstName + "' ,lastName ='" + objupdateper.LastName + "',Address = '" + objupdateper.Address + "', phone= '" + objupdateper.Phone + "', Email='" + objupdateper.Email + "' where id = '" + objupdateper.Id + "'";
+            command.CommandText = "update person set FirstName = '" + objPerson.FirstName + "' ,lastName ='" + objPerson.LastName + "',Address = '" + objPerson.Address + "', phone= '" + objPerson.Phone + "', Email='" + objPerson.Email + "' where id = '" + objPerson.Id + "'";
 
             int noOfRowsAffected = command.ExecuteNonQuery();
             connection.Close();
@@ -78,7 +77,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
                 return false;
             }
         }
-        public Person Getsingle(int id)
+        public Person GetSingle(int id)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
@@ -105,7 +104,6 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             connection.Close();
             return objPerson;
         }
-
         public List<Person> GetAll()
         {
             SqlConnection connection = new SqlConnection();

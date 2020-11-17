@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using TaskManagementSystem.Infrastructure.Interface;
 using TaskManagementSystem.Infrastructure.Repositories;
 using TaskManagementSystem.Model;
 using static System.Windows.Forms.DataGridView;
@@ -15,7 +16,7 @@ namespace TaskManagementSystem
     public partial class frmTaskAdd : Form
     {
         Task objTask = null;
-        TaskRepository repository = new TaskRepository();
+        IRepository<Task> repository = new TaskRepository();
         public frmTaskAdd()
         {
             InitializeComponent();

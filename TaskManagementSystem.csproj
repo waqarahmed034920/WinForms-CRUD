@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCategory.Designer.cs">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,14 +64,23 @@
     <Compile Include="frmTaskAdd.Designer.cs">
       <DependentUpon>frmTaskAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Interface\IRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\CategoryRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\OrderRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PersonRepositories.cs" />
     <Compile Include="Infrastructure\Repositories\TaskRepository.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="PersonRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="txtTask.cs" />
+    <EmbeddedResource Include="frmCategory.resx">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +99,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,5 +110,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

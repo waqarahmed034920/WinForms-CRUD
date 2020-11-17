@@ -31,5 +31,12 @@ namespace TaskManagementSystem
             objTaskAdd.WindowState = FormWindowState.Maximized;
         }
 
+        private void mnuManageCategory_Click(object sender, EventArgs e)
+        {
+            frmCategory objCategory = new frmCategory();
+            objCategory.MdiParent = this;
+            objCategory.Show();
+            objCategory.WindowState = FormWindowState.Maximized;
+        }
     }
 }

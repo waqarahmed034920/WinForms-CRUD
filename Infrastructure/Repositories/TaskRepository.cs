@@ -2,25 +2,31 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using TaskManagementSystem.Infrastructure.Interface;
 using TaskManagementSystem.Model;
 
 namespace TaskManagementSystem.Infrastructure.Repositories
 {
-    public class TaskRepository
+    public class TaskRepository : IRepository<Task>
     {
-        public bool Insert(Task objTask)
+        public SqlConnection connection;
+        public SqlCommand command;
+        // constructor;
+        public TaskRepository()
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
-
-            SqlCommand command = new SqlCommand();
+            connection = new SqlConnection();
+            connection.ConnectionString = Properties.Settings.Default.ConnectionString;
+            command = new SqlCommand();
             command.Connection = connection;
             command.CommandType = CommandType.Text;
+        }
+        public bool Insert(Task objTask)
+        {
+            command.Connection.Open();
             command.CommandText = "insert into Tasks(task,description,status) values('" + objTask.TaskName + "','" + objTask.Description + "','" + objTask.Status + "')";
 
             int noOfRowsAffected = command.ExecuteNonQuery();
-            connection.Close();
+            command.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -33,17 +39,11 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Update(Task objTask)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
+            command.Connection.Open();
             command.CommandText = "update Tasks set task = '" + objTask.TaskName + "', description = '" + objTask.Description + "', status = '" + objTask.Status + "' where id =  '" + objTask.Id + "'";
 
             int noOfRowsAffected = command.ExecuteNonQuery();
-            connection.Close();
+            command.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -56,16 +56,10 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Delete(int id)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
+            command.Connection.Open();
             command.CommandText = "delete from Tasks where id = " + id.ToString();
             int noOfRowsAffected = command.ExecuteNonQuery();
-            connection.Close();
+            command.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -78,13 +72,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
 
         public Task GetSingle(int id)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
+            command.Connection.Open();
             command.CommandText = "select * from Tasks where id = " + id.ToString();
             SqlDataReader myReader = command.ExecuteReader();
             Task objTask = null;
@@ -98,7 +86,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             }
 
             myReader.Close();
-            connection.Close();
+            command.Connection.Close();
 
             return objTask;
 
@@ -106,30 +94,34 @@ namespace TaskManagementSystem.Infrastructure.Repositories
 
         public List<Task> GetAll()
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "select * from Tasks";
-            SqlDataReader myReader = command.ExecuteReader();
-            List<Task> tasklist = new List<Task>();
-            while (myReader.Read())
+            try
             {
-                Task objtask = new Task();
-                objtask.Id = Convert.ToInt32(myReader["id"]);
-                objtask.TaskName = myReader["task"].ToString();
-                objtask.Description = myReader["description"].ToString();
-                objtask.Status = myReader["status"].ToString();
-                tasklist.Add(objtask);
+
+                command.Connection.Open();
+
+                command.CommandText = "select * from Tasks";
+                SqlDataReader myReader = command.ExecuteReader();
+                List<Task> tasklist = new List<Task>();
+                while (myReader.Read())
+                {
+                    Task objtask = new Task();
+                    objtask.Id = Convert.ToInt32(myReader["id"]);
+                    objtask.TaskName = myReader["task"].ToString();
+                    objtask.Description = myReader["description"].ToString();
+                    objtask.Status = myReader["status"].ToString();
+                    tasklist.Add(objtask);
+                }
+
+                myReader.Close();
+                command.Connection.Close();
+                return tasklist;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
             }
 
-            myReader.Close();
-            connection.Close();
-
-            return tasklist;
 
         }
     }

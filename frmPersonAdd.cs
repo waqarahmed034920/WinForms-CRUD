@@ -115,7 +115,7 @@ namespace TaskManagementSystem
                           objPerson.Address = txtAddress.Text;
                           objPerson.Phone = txtPhone.Text;
                           objPerson.Email = txtEmail.Text;
-                          output = this.repositories.insert(objPerson);
+                          output = this.repositories.Insert(objPerson);
                           msg = "Record saved successfully.";
                       }
                       else
@@ -125,7 +125,7 @@ namespace TaskManagementSystem
                          objPerson.Address = txtAddress.Text;
                          objPerson.Phone = txtPhone.Text;
                          objPerson.Email = txtEmail.Text;
-                         output = this.repositories.update(objPerson);
+                         output = this.repositories.Update(objPerson);
                          msg = "Record updated successfully.";
                       }
 
@@ -178,7 +178,7 @@ namespace TaskManagementSystem
         {
             int id = Convert.ToInt32(dgPerson.CurrentRow.Cells[0].Value.ToString());
 
-            this.objPerson = this.repositories.Getsingle(id);
+            this.objPerson = this.repositories.GetSingle(id);
             if (objPerson != null)
             {
                 this.txtFirstName.Text = objPerson.FirstName;
@@ -209,6 +209,11 @@ namespace TaskManagementSystem
                     RefreshGrid();
                 }
             }
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
     

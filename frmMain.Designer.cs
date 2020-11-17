@@ -34,6 +34,9 @@
             this.mnuPersonSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTask = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuManageCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +44,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuPerson,
-            this.mnuTask});
+            this.mnuTask,
+            this.categoryToolStripMenuItem,
+            this.itemToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -85,6 +90,27 @@
             this.mnuTaskAdd.Text = "Add";
             this.mnuTaskAdd.Click += new System.EventHandler(this.mnuTaskAdd_Click);
             // 
+            // categoryToolStripMenuItem
+            // 
+            this.categoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuManageCategory});
+            this.categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
+            this.categoryToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.categoryToolStripMenuItem.Text = "Category";
+            // 
+            // itemToolStripMenuItem
+            // 
+            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.itemToolStripMenuItem.Text = "Item";
+            // 
+            // mnuManageCategory
+            // 
+            this.mnuManageCategory.Name = "mnuManageCategory";
+            this.mnuManageCategory.Size = new System.Drawing.Size(180, 22);
+            this.mnuManageCategory.Text = "Manage";
+            this.mnuManageCategory.Click += new System.EventHandler(this.mnuManageCategory_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,5 +138,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuPersonSearch;
         private System.Windows.Forms.ToolStripMenuItem mnuTask;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskAdd;
+        private System.Windows.Forms.ToolStripMenuItem categoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuManageCategory;
     }
 }
