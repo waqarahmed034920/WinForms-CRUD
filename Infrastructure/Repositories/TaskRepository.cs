@@ -9,24 +9,22 @@ namespace TaskManagementSystem.Infrastructure.Repositories
 {
     public class TaskRepository : IRepository<Task>
     {
-        public SqlConnection connection;
-        public SqlCommand command;
+        public SqlCommand cmd;
         // constructor;
         public TaskRepository()
         {
-            connection = new SqlConnection();
-            connection.ConnectionString = Properties.Settings.Default.ConnectionString;
-            command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.ConnectionString);
+            cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandType = CommandType.Text;
         }
         public bool Insert(Task objTask)
         {
-            command.Connection.Open();
-            command.CommandText = "insert into Tasks(task,description,status) values('" + objTask.TaskName + "','" + objTask.Description + "','" + objTask.Status + "')";
+            cmd.Connection.Open();
+            cmd.CommandText = "insert into Tasks(task,description,status) values('" + objTask.TaskName + "','" + objTask.Description + "','" + objTask.Status + "')";
 
-            int noOfRowsAffected = command.ExecuteNonQuery();
-            command.Connection.Close();
+            int noOfRowsAffected = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -39,11 +37,11 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Update(Task objTask)
         {
-            command.Connection.Open();
-            command.CommandText = "update Tasks set task = '" + objTask.TaskName + "', description = '" + objTask.Description + "', status = '" + objTask.Status + "' where id =  '" + objTask.Id + "'";
+            cmd.Connection.Open();
+            cmd.CommandText = "update Tasks set task = '" + objTask.TaskName + "', description = '" + objTask.Description + "', status = '" + objTask.Status + "' where id =  '" + objTask.Id + "'";
 
-            int noOfRowsAffected = command.ExecuteNonQuery();
-            command.Connection.Close();
+            int noOfRowsAffected = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -56,10 +54,10 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Delete(int id)
         {
-            command.Connection.Open();
-            command.CommandText = "delete from Tasks where id = " + id.ToString();
-            int noOfRowsAffected = command.ExecuteNonQuery();
-            command.Connection.Close();
+            cmd.Connection.Open();
+            cmd.CommandText = "delete from Tasks where id = " + id.ToString();
+            int noOfRowsAffected = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -72,9 +70,9 @@ namespace TaskManagementSystem.Infrastructure.Repositories
 
         public Task GetSingle(int id)
         {
-            command.Connection.Open();
-            command.CommandText = "select * from Tasks where id = " + id.ToString();
-            SqlDataReader myReader = command.ExecuteReader();
+            cmd.Connection.Open();
+            cmd.CommandText = "select * from Tasks where id = " + id.ToString();
+            SqlDataReader myReader = cmd.ExecuteReader();
             Task objTask = null;
             while (myReader.Read())
             {
@@ -86,7 +84,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             }
 
             myReader.Close();
-            command.Connection.Close();
+            cmd.Connection.Close();
 
             return objTask;
 
@@ -97,10 +95,10 @@ namespace TaskManagementSystem.Infrastructure.Repositories
             try
             {
 
-                command.Connection.Open();
+                cmd.Connection.Open();
 
-                command.CommandText = "select * from Tasks";
-                SqlDataReader myReader = command.ExecuteReader();
+                cmd.CommandText = "select * from Tasks";
+                SqlDataReader myReader = cmd.ExecuteReader();
                 List<Task> tasklist = new List<Task>();
                 while (myReader.Read())
                 {
@@ -113,7 +111,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
                 }
 
                 myReader.Close();
-                command.Connection.Close();
+                cmd.Connection.Close();
                 return tasklist;
             }
             catch (Exception ex)

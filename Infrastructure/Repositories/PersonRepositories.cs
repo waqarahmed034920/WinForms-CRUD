@@ -8,21 +8,36 @@ using TaskManagementSystem.Infrastructure.Interface;
 
 namespace TaskManagementSystem.Infrastructure.Repositories
 {
-    public class PersonRepositories: IRepository<Person>
+    public class PersonRepositories : IRepository<Person>
     {
+       // string connnectionstring;
+        //private string connectionString;
+        public SqlCommand cmd;
+
+        public PersonRepositories()
+        {
+            //this.connectionString = Properties.Settings.Default.ConnectionString;
+            //System.Windows.Forms.MessageBox.Show(this.connectionString);
+
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.ConnectionString);
+            cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandType = CommandType.Text;
+        }
+
         public bool Insert(Person objPerson)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
+            //SqlConnection connection = new SqlConnection();
+            //connection.ConnectionString = this.connectionString;
+            cmd.Connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "insert into person(FirstName,lastName,Address,Phone,Email) values('" + objPerson.FirstName + "','" + objPerson.LastName + "','" + objPerson.Address + "','" + objPerson.Phone + "','" + objPerson.Email + "')";
+           // SqlCommand command = new SqlCommand();
+            //command.Connection = connection;
+           // command.CommandType = CommandType.Text;
+            cmd.CommandText = "insert into person(FirstName,lastName,Address,Phone,Email) values('" + objPerson.FirstName + "','" + objPerson.LastName + "','" + objPerson.Address + "','" + objPerson.Phone + "','" + objPerson.Email + "')";
 
-            int noOfRowsAffected = command.ExecuteNonQuery();
-            connection.Close();
+            int noOfRowsAffected = cmd.ExecuteNonQuery();
+           cmd.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -35,17 +50,17 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Update(Person objPerson)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
+            //SqlConnection connection = new SqlConnection();
+            //connection.ConnectionString = this.connectionString;
+            cmd.Connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "update person set FirstName = '" + objPerson.FirstName + "' ,lastName ='" + objPerson.LastName + "',Address = '" + objPerson.Address + "', phone= '" + objPerson.Phone + "', Email='" + objPerson.Email + "' where id = '" + objPerson.Id + "'";
+           // SqlCommand command = new SqlCommand();
+           // command.Connection = connection;
+           // command.CommandType = CommandType.Text;
+            cmd.CommandText = "update person set FirstName = '" + objPerson.FirstName + "' ,lastName ='" + objPerson.LastName + "',Address = '" + objPerson.Address + "', phone= '" + objPerson.Phone + "', Email='" + objPerson.Email + "' where id = '" + objPerson.Id + "'";
 
-            int noOfRowsAffected = command.ExecuteNonQuery();
-            connection.Close();
+            int noOfRowsAffected = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -57,17 +72,17 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Delete(int id)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
+            //SqlConnection connection = new SqlConnection();
+            //connection.ConnectionString = this.connectionString;
+            cmd.Connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "delete  from person where id = " + id.ToString();
+            //SqlCommand command = new SqlCommand();
+            //command.Connection = connection;
+            //command.CommandType = CommandType.Text;
+            cmd.CommandText = "delete  from person where id = " + id.ToString();
 
-            int noOfRowsAffected = command.ExecuteNonQuery();
-            connection.Close();
+            int noOfRowsAffected = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
             if (noOfRowsAffected >= 1)
             {
                 return true;
@@ -79,15 +94,15 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public Person GetSingle(int id)
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
+            //SqlConnection connection = new SqlConnection();
+            //connection.ConnectionString = this.connectionString;
+            cmd.Connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "select * from person where id=" + id.ToString();
-            SqlDataReader myreader = command.ExecuteReader();
+            //SqlCommand command = new SqlCommand();
+            //command.Connection = connection;
+            //command.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from person where id=" + id.ToString();
+            SqlDataReader myreader = cmd.ExecuteReader();
             Person objPerson = null;
             while (myreader.Read())
             {
@@ -101,20 +116,20 @@ namespace TaskManagementSystem.Infrastructure.Repositories
 
             }
             myreader.Close();
-            connection.Close();
+            cmd.Connection.Close();
             return objPerson;
         }
         public List<Person> GetAll()
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;";
-            connection.Open();
+            //SqlConnection connection = new SqlConnection();
+            //connection.ConnectionString = this.connectionString;
+            cmd.Connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "select * from person";
-            SqlDataReader myreader = command.ExecuteReader();
+            //SqlCommand command = new SqlCommand();
+           // command.Connection = connection;
+            //command.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from person";
+            SqlDataReader myreader = cmd.ExecuteReader();
             List<Person> personlist = new List<Person>();
             while (myreader.Read())
             {
@@ -128,7 +143,7 @@ namespace TaskManagementSystem.Infrastructure.Repositories
                 personlist.Add(objperson);
             }
             myreader.Close();
-            connection.Close();
+            cmd.Connection.Close();
             return personlist;
         }
     }

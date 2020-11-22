@@ -25,7 +25,7 @@ namespace TaskManagementSystem.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=waqar-pc\\\\sqlexpress; Database=aptech; trusted_connection=true;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=waqar-pc\\sqlexpress; Database=aptech; trusted_connection=true;")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

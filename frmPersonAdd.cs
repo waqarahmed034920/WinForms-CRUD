@@ -149,21 +149,7 @@ namespace TaskManagementSystem
         } 
                     
 
-                
-
-
-            
-
-        
-
-       
-
-        
-
-       
-
-       
-       
+              
 
         private void dgPerson_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
