@@ -38,5 +38,13 @@ namespace TaskManagementSystem
             objCategory.Show();
             objCategory.WindowState = FormWindowState.Maximized;
         }
+
+        private void mnuManageItem_Click(object sender, EventArgs e)
+        {
+            frmItem objItem = new frmItem();
+            objItem.MdiParent = this;
+            objItem.Show();
+            objItem.WindowState = FormWindowState.Maximized;
+        }
     }
 }

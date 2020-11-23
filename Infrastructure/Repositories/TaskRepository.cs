@@ -20,73 +20,115 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         }
         public bool Insert(Task objTask)
         {
-            cmd.Connection.Open();
-            cmd.CommandText = "insert into Tasks(task,description,status) values('" + objTask.TaskName + "','" + objTask.Description + "','" + objTask.Status + "')";
-
-            int noOfRowsAffected = cmd.ExecuteNonQuery();
-            cmd.Connection.Close();
-            if (noOfRowsAffected >= 1)
+            try
             {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                cmd.Connection.Open();
+                cmd.CommandText = "insert into Tasks(task,description,status) values('" + objTask.TaskName + "','" + objTask.Description + "','" + objTask.Status + "')";
 
+                int noOfRowsAffected = cmd.ExecuteNonQuery();
+                if (noOfRowsAffected >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
         }
         public bool Update(Task objTask)
         {
-            cmd.Connection.Open();
-            cmd.CommandText = "update Tasks set task = '" + objTask.TaskName + "', description = '" + objTask.Description + "', status = '" + objTask.Status + "' where id =  '" + objTask.Id + "'";
+            try
+            {
+                cmd.Connection.Open();
+                cmd.CommandText = "update Tasks set task = '" + objTask.TaskName + "', description = '" + objTask.Description + "', status = '" + objTask.Status + "' where id =  '" + objTask.Id + "'";
 
-            int noOfRowsAffected = cmd.ExecuteNonQuery();
-            cmd.Connection.Close();
-            if (noOfRowsAffected >= 1)
-            {
-                return true;
+                int noOfRowsAffected = cmd.ExecuteNonQuery();
+                if (noOfRowsAffected >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
             }
 
         }
         public bool Delete(int id)
         {
-            cmd.Connection.Open();
-            cmd.CommandText = "delete from Tasks where id = " + id.ToString();
-            int noOfRowsAffected = cmd.ExecuteNonQuery();
-            cmd.Connection.Close();
-            if (noOfRowsAffected >= 1)
+            try
             {
-                return true;
+                cmd.Connection.Open();
+                cmd.CommandText = "delete from Tasks where id = " + id.ToString();
+                int noOfRowsAffected = cmd.ExecuteNonQuery();
+                if (noOfRowsAffected >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
             }
         }
 
         public Task GetSingle(int id)
         {
-            cmd.Connection.Open();
-            cmd.CommandText = "select * from Tasks where id = " + id.ToString();
-            SqlDataReader myReader = cmd.ExecuteReader();
-            Task objTask = null;
-            while (myReader.Read())
+            try
             {
-                objTask = new Task();
-                objTask.Id = Convert.ToInt32(myReader["id"]);
-                objTask.TaskName = myReader["task"].ToString();
-                objTask.Description = myReader["description"].ToString();
-                objTask.Status = myReader["status"].ToString();
+                cmd.Connection.Open();
+                cmd.CommandText = "select * from Tasks where id = " + id.ToString();
+                SqlDataReader myReader = cmd.ExecuteReader();
+                Task objTask = null;
+                while (myReader.Read())
+                {
+                    objTask = new Task();
+                    objTask.Id = Convert.ToInt32(myReader["id"]);
+                    objTask.TaskName = myReader["task"].ToString();
+                    objTask.Description = myReader["description"].ToString();
+                    objTask.Status = myReader["status"].ToString();
+                }
+
+                myReader.Close();
+
+                return objTask;
+
             }
-
-            myReader.Close();
-            cmd.Connection.Close();
-
-            return objTask;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
 
         }
 

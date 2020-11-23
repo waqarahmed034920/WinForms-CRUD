@@ -46,6 +46,12 @@
     <Compile Include="frmCategory.Designer.cs">
       <DependentUpon>frmCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmItem.Designer.cs">
+      <DependentUpon>frmItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,10 +72,12 @@
     </Compile>
     <Compile Include="Infrastructure\Interface\IRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CategoryRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\ItemRepository.cs" />
     <Compile Include="Infrastructure\Repositories\OrderRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PersonRepositories.cs" />
     <Compile Include="Infrastructure\Repositories\TaskRepository.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Task.cs" />
@@ -80,6 +88,9 @@
     <Compile Include="txtTask.cs" />
     <EmbeddedResource Include="frmCategory.resx">
       <DependentUpon>frmCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmItem.resx">
+      <DependentUpon>frmItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

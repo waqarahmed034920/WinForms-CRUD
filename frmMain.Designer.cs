@@ -35,8 +35,9 @@
             this.mnuTask = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.categoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuManageCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuManageItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +87,7 @@
             // mnuTaskAdd
             // 
             this.mnuTaskAdd.Name = "mnuTaskAdd";
-            this.mnuTaskAdd.Size = new System.Drawing.Size(180, 22);
+            this.mnuTaskAdd.Size = new System.Drawing.Size(96, 22);
             this.mnuTaskAdd.Text = "Add";
             this.mnuTaskAdd.Click += new System.EventHandler(this.mnuTaskAdd_Click);
             // 
@@ -98,18 +99,27 @@
             this.categoryToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.categoryToolStripMenuItem.Text = "Category";
             // 
-            // itemToolStripMenuItem
-            // 
-            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.itemToolStripMenuItem.Text = "Item";
-            // 
             // mnuManageCategory
             // 
             this.mnuManageCategory.Name = "mnuManageCategory";
             this.mnuManageCategory.Size = new System.Drawing.Size(180, 22);
             this.mnuManageCategory.Text = "Manage";
             this.mnuManageCategory.Click += new System.EventHandler(this.mnuManageCategory_Click);
+            // 
+            // itemToolStripMenuItem
+            // 
+            this.itemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuManageItem});
+            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.itemToolStripMenuItem.Text = "Item";
+            // 
+            // mnuManageItem
+            // 
+            this.mnuManageItem.Name = "mnuManageItem";
+            this.mnuManageItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuManageItem.Text = "Manage";
+            this.mnuManageItem.Click += new System.EventHandler(this.mnuManageItem_Click);
             // 
             // frmMain
             // 
@@ -141,5 +151,6 @@
         private System.Windows.Forms.ToolStripMenuItem categoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuManageCategory;
+        private System.Windows.Forms.ToolStripMenuItem mnuManageItem;
     }
 }

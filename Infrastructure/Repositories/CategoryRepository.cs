@@ -14,7 +14,6 @@ namespace TaskManagementSystem.Infrastructure.Repositories
         public CategoryRepository()
         {
             this.connectionString = Properties.Settings.Default.ConnectionString;
-            System.Windows.Forms.MessageBox.Show(this.connectionString);
         }
         public bool Delete(int Id)
         {
